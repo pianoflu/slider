@@ -1,4 +1,4 @@
-$(function() {
+﻿$(function() {
 
 	// 获取参数
 	var imgSlider = $('.imageSlider'),                                         // 图片轮换容器
@@ -63,7 +63,6 @@ $(function() {
 		    });
 		}
 
-		console.log(imageBox[0].style.left)
 		// 切换当前图片 id
 		activeID = nextID;
 	};
