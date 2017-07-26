@@ -13,8 +13,8 @@ $(function() {
 		activeID = parseInt(icoBox.children(".active").attr("rel")),           // 当前图片ID
 		nextID = 0,                                                            // 下张图片ID
 		setIntervalID,                                                         // setInterval() 函数ID
-		intervalTime = 1000,                                                   // 间隔时间
-		imageSpeed = 20000,                                                      // 图片动画执行速度
+		intervalTime = 4000,                                                   // 间隔时间
+		imageSpeed = 500,                                                      // 图片动画执行速度
 		titleSpeed = 250;                                                      // 标题动画执行速度
 		
 	// 设置 图片容器 的宽度
@@ -31,7 +31,11 @@ $(function() {
 			// 自动轮播的情况下
 			// 判断是否为最后一张图片
 			// 是则切换到第一张
-			nextID = activeID <= imageNum - 1 ? activeID + 1 : 1;
+			if(activeID < imageNum-1){
+			    nextID = activeID + 1;
+			}else{
+			    nextID = 1;
+			}
 		}
 		
 		// 切换 active 的小圆点
@@ -51,8 +55,15 @@ $(function() {
 		);
 		
 		// 切换图片
-		imageBox.animate({ left: "-" + (nextID - 1) * imageWidth + "px"} , imageSpeed);
-		
+		if(activeID < imageNum - 1){
+		    imageBox.animate({ left: "-" + (activeID) * imageWidth + "px"} , imageSpeed);
+		}else{
+		    imageBox.animate({ left: "-" + (activeID) * imageWidth + "px"} , imageSpeed,function(){
+		        imageBox[0].style.left = "0px";
+		    });
+		}
+
+		console.log(imageBox[0].style.left)
 		// 切换当前图片 id
 		activeID = nextID;
 	};
